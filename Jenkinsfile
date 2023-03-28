@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_HUB_REPO = "shivammitra/flask-hello-world"
+        DOCKER_HUB_REPO = "akashbkochure/flask-hello-world"
         CONTAINER_NAME = "flask-hello-world"
         DOCKERHUB_CREDENTIALS=credentials('dockerhub-credentials')
     }
@@ -34,8 +34,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'minikube kubectl -- apply -f deployment.yaml'
-                sh 'minikube kubectl -- apply -f service.yaml'
+                sh 'scp -r -o StrictHostKeyChecking=no deployment.yaml service.yaml ubuntu@ip-172-31-16-148:~/'
+ 
+                sh 'ssh ubuntu@ip-172-31-16-148 kubectl apply -f ~/deployment.yaml'
+                sh 'ssh ubuntu@ip-172-31-16-148 kubectl apply -f ~/service.yaml'
             }
         }
     }
