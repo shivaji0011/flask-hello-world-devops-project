@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo 'Pushing image..'
                 sh 'export DISPLAY=:0'
-                sh 'echo docker login -u akashbkochure --password-MaYuR940206'
+                sh 'echo docker login -u akashbkochure --password-dckr_pat_nm2hE5KFJtdxUkXXJyK_s1K3SU4'
                 sh 'docker push $DOCKER_HUB_REPO:latest'
             }
         }
