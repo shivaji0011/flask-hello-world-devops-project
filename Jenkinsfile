@@ -34,10 +34,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'scp -r -o StrictHostKeyChecking=no deployment.yaml service.yaml ubuntu@ip-172-31-16-148:~/'
+                sh 'scp -r -o StrictHostKeyChecking=no deployment.yaml service.yaml ubuntu@ip-172-31-16-148:/opt/docker'
  
-                sh 'ssh ubuntu@ip-172-31-16-148 kubectl apply -f ~/deployment.yaml'
-                sh 'ssh ubuntu@ip-172-31-16-148 kubectl apply -f ~/service.yaml'
+                sh 'ssh ubuntu@ip-172-31-16-148 kubectl apply -f /opt/docker/deployment.yaml'
+                sh 'ssh ubuntu@ip-172-31-16-148 kubectl apply -f /opt/docker/service.yaml'
             }
         }
     }
